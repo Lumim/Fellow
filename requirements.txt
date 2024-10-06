@@ -3,5 +3,4 @@ uvicorn==0.22.0
 sqlalchemy==2.0.12
 pydantic==1.10.7
 starlette==0.26.1
-psycopg2-binary==2.9.6
-PyMySQL==1.0.2  # Add this line for MySQL support
+PyMySQL==1.0.2 
