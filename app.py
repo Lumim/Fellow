@@ -57,6 +57,7 @@ class UserPointAdd(BaseModel):
     mobile: str
     restaurant_name: str  # Fix the typo here
     points: int
+    active:1
 
 @app.post('/users/restaurant/addpoint')
 def add_restaurant_point(user_point_add: UserPointAdd, db: Session = Depends(database.get_db)):
@@ -72,19 +73,22 @@ def add_restaurant_point(user_point_add: UserPointAdd, db: Session = Depends(dat
         user_name=user_point_add.name,  # Adjusted field
         mobile_number=user_point_add.mobile,  # Adjusted field
         restaurant_name=user_point_add.restaurant_name,
-        points=user_point_add.points)
+        points=user_point_add.points,
+        active=1)
         db.add(db_point_add)
     else:
-        total_points = db.query(func.sum(models.UserPoint.points)).filter(
-            models.UserPoint.mobile_number == mobile_number,
-            models.UserPoint.restaurant_name == restaurant_name,
+        total_points = db.query(models.UserPoint.points).filter(
+            models.UserPoint.mobile_number == user_point_add.mobile,
+            models.UserPoint.restaurant_name == user_point_add.restaurant_name,
             models.UserPoint.active == 1,
-            ).scalar()
+            )
+        print(total_points)
+       
         db_point_add = models.UserPoint(
             user_name=user_point_add.name,  # Adjusted field
             mobile_number=user_point_add.mobile,  # Adjusted field
             restaurant_name=user_point_add.restaurant_name,
-            points=user_point_add.points+total_points)
+            points=(total_points+user_point_add.points))
             
         
         db.update(db_point_add)
