@@ -1,38 +1,61 @@
 # User model
-from sqlalchemy import Column, Integer, String # type: ignore
+from sqlalchemy import Column, Integer, String, LargeBinary # type: ignore
 from database import Base
-
-class User(Base):
-    __tablename__ = "users"
+from typing import List
+from pydantic import BaseModel
+class Customers(Base):
+    __tablename__ = "customers"
 
     id = Column(Integer, primary_key=True, index=True)
-    mobile_number = Column(String(100), unique=True, nullable=False)
     user_name = Column(String(100), nullable=True)
-class UserPoint(Base):
-    __tablename__ = "userPoint"
-    id = Column(Integer, primary_key=True, index=True)
-    user_name = Column(String(100), nullable=True)
+    type = Column(String(100), nullable=True)
+    card_number = Column(String(100), nullable=True)
     mobile_number = Column(String(100), unique=True, nullable=False)
-    restaurant_name = Column(String(100), nullable=True)  # Fix the typo here
-    points = Column(Integer, nullable=True)
-    active=Column(Integer, nullable=True)
+    number_of_visits = Column(String(100), nullable=True)
+    profile_img = Column(LargeBinary, nullable=True)
     
-class RestaurantOfferTable(Base):
-    __tablename__ = "restaurant_offer_table"
-    id = Column(Integer, primary_key=True, index=True)
-    restaurant_name = Column(String(100), nullable=True)
-    offer_type = Column(String(100), unique=True, nullable=False)
-    offer_value = Column(String(100), nullable=True)  # Fix the typo here
-    offer_name = Column(Integer, nullable=True)
-    points_deduct = Column(Integer, nullable=True)
-    active_status=Column(Integer, nullable=True)
 
-class RestaurantPointTable(Base):
-    __tablename__ = "restaurant_point_table"
+class CustomerOfferCalculateTable(Base):
+    __tablename__ = "customer_offer_calculate_table"
+
     id = Column(Integer, primary_key=True, index=True)
-    restaurant_name = Column(String(100), nullable=True)
-    product_name = Column(String(100), nullable=False)
-    variant = Column(String(100), nullable=True)  # Fix the typo here
-    points = Column(Integer, nullable=True)
-    points_deduct = Column(Integer, nullable=True)
-    active_status=Column(Integer, nullable=True)
+    customer_id = Column(Integer, nullable=True)
+    offer_id = Column(Integer, nullable=True)
+    restaurant_id = Column(Integer, nullable=True)
+    condition_met = Column(String(100), unique=True, nullable=False)
+    offer_taken = Column(String(100), nullable=True)
+
+
+
+class OfferTable(Base):
+    __tablename__ = "offer_table"
+
+    id = Column(Integer, primary_key=True, index=True)
+    restaurant_id = Column(String(100), nullable=True)
+    type = Column(String(100), nullable=True)
+    details = Column(String(100), nullable=True)
+    condition_type = Column(String(100), unique=True, nullable=False)
+    condition_value = Column(Integer)
+    offer_name = Column(String(100), unique=True, nullable=False)
+
+class Points(Base):
+    __tablename__ = "points"
+
+    id = Column(Integer, primary_key=True, index=True)
+    customer_id = Column(Integer, nullable=True)
+    available_points = Column(String(100), nullable=True)
+    mobile_number = Column(String(100), nullable=True)
+    used_points = Column(String(100), unique=True, nullable=False)
+
+class Restaurant(Base):
+    __tablename__ = "restaurant"
+
+    id = Column(Integer, primary_key=True, index=True)
+    profile_img = Column(LargeBinary, nullable=True)
+    banner_img = Column(LargeBinary, nullable=True)
+    owner_img = Column(LargeBinary, nullable=True)
+    rest_name = Column(String(100), nullable=True)
+    type = Column(String(100), unique=True, nullable=False)
+    rest_mobile_number = Column(String(100), nullable=True)
+    backup_number = Column(String(100), nullable=True)
+    cvr = Column(String(100), nullable=True)
