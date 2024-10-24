@@ -1,0 +1,223 @@
+{
+	"info": {
+		"_postman_id": "ffbe7561-8cdc-4429-800b-0d9af720a904",
+		"name": "FastAPI Project Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3167593"
+	},
+	"item": [
+		{
+			"name": "Create Restaurant",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"rest_name\": \"dhaba kitchen\",\n  \"rest_mobile_number\": \"92455654\",\n  \"type\": \"indisk food\",\n  \"cvr\": \"74456\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/restaurants",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"restaurants"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Offer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"restaurant_id\": 1,\n  \"type\":\"discount 100\",\n  \"offer_name\": \"Special Discount\",\n  \"details\": \"10% off on all items\",\n  \"condition_type\": \"points\",\n  \"condition_value\": 110\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/offers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"offers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Customer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user_name\": \"John Doe\",\n  \"mobile_number\": \"987654321\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/customers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check if User Exists",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/users/check/71607572",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"check",
+						"71607572"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Points to Customer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user_name\": \"CHAMAR\",\n  \"mobile_number\": \"71607572\",\n  \"restaurant_name\":\"mcdonalds\",\n  \"points\": 3223\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/users/restaurant/addpoint",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"restaurant",
+						"addpoint"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Points Against Restaurant",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/users/get/offer/71607572/mcdonalds",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"get",
+						"offer",
+						"71607572",
+						"mcdonalds"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Avail Offer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"mobile_number\": \"71607572\",\n  \"offer_id\":7,\n  \"restaurant_id\": 1\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/offers/avail",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"offers",
+						"avail"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get restaurant details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/restaurant/check/kfc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"restaurant",
+						"check",
+						"kfc"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

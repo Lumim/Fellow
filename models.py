@@ -45,13 +45,14 @@ class Points(Base):
     customer_id = Column(Integer, nullable=True)
     available_points = Column(String(100), nullable=True)
     mobile_number = Column(String(100), nullable=True)
+    restaurant_name=Column(String(100),nullable=False)
     used_points = Column(String(100), unique=True, nullable=False)
 
 class Restaurant(Base):
     __tablename__ = "restaurant"
 
     id = Column(Integer, primary_key=True, index=True)
-    profile_img = Column(LargeBinary, nullable=True)
+    logo_img = Column(LargeBinary, nullable=True)
     banner_img = Column(LargeBinary, nullable=True)
     owner_img = Column(LargeBinary, nullable=True)
     rest_name = Column(String(100), nullable=True)
